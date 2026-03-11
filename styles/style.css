@@ -1,0 +1,304 @@
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+    background: linear-gradient(180deg,#23033d,#28022b);
+    color:white;
+    min-height:100vh;
+    padding:20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+header p{
+    font-size:1.5rem;
+  
+}
+
+header select{
+    padding:6px 10px;
+    border-radius:6px;
+    border:none;
+    background:#392c4a;
+    color:white;
+}
+
+
+
+#titulo_principal{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:2rem;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+#pesquisa{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:40px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#pesquisa input{
+    width:350px;
+    padding:12px 16px;
+    border-radius:10px;
+    border:none;
+    background:#3e2c4a;
+    color:white;
+    font-size:16px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#pesquisa input::placeholder{
+    color:#aaaaaa;
+}
+
+#pesquisa button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#9b4cf5;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#pesquisa button:hover{
+    background:#8e3bdb;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+
+.caixa_maior{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+
+.caixa1{
+    background:#391237;
+    border-radius:20px;
+    padding:20px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* CLIMA ATUAL */
+
+.caixa1 section:first-child{
+    background:linear-gradient(135deg,#954cf5,#953bbf);
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#clima{
+    font-size:3rem;
+}
+
+/* DETALHES */.info-clima{
+    display:flex;
+    justify-content:center;
+}
+
+.info-clima ul{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+
+gap:15px;
+
+list-style:none;
+padding:0;
+
+max-width:900px;
+width:100%;
+
+}
+
+.info-clima li{
+
+background:rgba(255,255,255,0.15);
+
+padding:15px;
+
+border-radius:12px;
+
+display:flex;
+flex-direction:column;
+
+}
+
+.info-clima li p{
+
+margin:0;
+font-size:0.8rem;
+opacity:0.7;
+
+}
+
+.info-clima li span{
+
+font-size:1.6rem;
+font-weight:600;
+margin-top:6px;
+
+}
+
+/* PREVISÃO SEMANA */
+
+.caixa1 section:nth-child(3) p{
+    margin-top:20px;
+    margin-bottom:10px;
+}
+
+.caixa1 section:nth-child(3) ul{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+    list-style:none;
+}
+
+.caixa1 section:nth-child(3) li{
+    background:#321e4d;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+}
+
+/* PREVISÃO DO DIA */
+
+.caixa2{
+    background:#2d1239;
+    border-radius:20px;
+    padding:20px;
+}
+
+/* linha do título + seletor */
+
+.caixa2 .topo p{
+    margin:0;
+}
+
+.caixa2 .topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.caixa2 select{
+    padding:6px 10px;
+    border-radius:6px;
+    border:none;
+    background:#3c2c4a;
+    color:white;
+}
+
+.caixa2 ul{
+    margin-top:15px;
+    list-style:none;
+    padding:0;
+}
+
+.caixa2 li{
+    background:#3d1b50;
+    padding:10px;
+    border-radius:6px;
+    font-size:14px;
+    margin-bottom:10px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.caixa2 li span{
+    margin-left:auto;
+}
+/* RESPONSIVIDADE */
+@media (max-width:900px){
+
+    .caixa_maior{
+        grid-template-columns:1fr;
+    }
+
+    .info-clima ul{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .caixa1 section:nth-child(3) ul{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+}
+
+@media (max-width:600px){
+
+    #titulo_principal{
+        font-size:1.5rem;
+    }
+
+    #pesquisa{
+        flex-direction:column;
+        align-items:center;
+        gap:10px;
+    }
+
+    #pesquisa input{
+        width:100%;
+        max-width:300px;
+    }
+
+    #pesquisa button{
+        width:160px;
+    }
+
+    .info-clima ul{
+        grid-template-columns:1fr;
+    }
+
+    .caixa1 section:nth-child(3) ul{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:400px){
+
+    .caixa1 section:nth-child(3) ul{
+        grid-template-columns:1fr;
+    }
+
+}
