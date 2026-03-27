@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>site tempo</title>
 <link rel="stylesheet" href="./styles/style.css">
+<script type="module" src="./scripts/index.js" defer></script>
 </head>
 
 <body>
@@ -17,9 +18,7 @@
 <option>Opção 1</option>
 <option>Opção 1</option>
 </select>
-
 </header>
-
 
 <main>
 
@@ -30,13 +29,11 @@
 <button>pesquisar</button>
 </section>
 
-
 <div class="caixa_maior">
-
 
 <div class="caixa1">
 
-<section>
+<section id="banner">
 
 <div>
 <h2>São Paulo, Brasil</h2>
@@ -49,8 +46,7 @@
 
 </section>
 
-
-<section class="info-clima">
+<section class="info-clima" id="day-info">
 
 <ul>
 
@@ -73,14 +69,16 @@
 <p>🌧 Chuva</p>
 <span>0 mm</span>
 </li>
-</section>
 
+</ul>
+</section>
 
 <section>
 
 <p>Previsão do tempo semanal</p>
 
-<ul>
+
+<ul id="daily">
 
 <li>Ter <br> ☀️ <br> 20° 14°</li>
 <li>Qua <br> ☁️ <br> 21° 15°</li>
@@ -96,7 +94,6 @@
 
 </div>
 
-
 <section class="caixa2">
 
 <div class="topo">
@@ -107,8 +104,7 @@
 </select>
 </div>
 
-
-<ul>
+<ul id="hourly">
 
 <li>☁️ 15h <span>20°</span></li>
 <li>🌤️ 16h <span>20°</span></li>
@@ -122,7 +118,6 @@
 </ul>
 
 </section>
-
 
 </div>
 
