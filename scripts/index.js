@@ -1,7 +1,53 @@
 console.log("JS funcionando");
-import { cityWeather } from "./data.js";
 
-// Banner (caixa principal)
+import { API_KEY } from "./config.js";
+
+// ================= FETCH =================
+async function fetchWeather(city) {
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7&lang=pt`
+  );
+
+  if (!response.ok) {
+    throw new Error("Erro ao buscar dados da API");
+  }
+
+  return response.json();
+}
+
+// ================= ADAPTADOR =================
+function adaptWeatherData(data) {
+  return {
+    city: data.location.name,
+    country: data.location.country,
+    date: data.location.localtime,
+
+    temperature: data.current.temp_c,
+    feelsLike: data.current.feelslike_c,
+    humidity: data.current.humidity,
+    wind: data.current.wind_kph,
+    precipitation: data.current.precip_mm,
+
+    icon: data.current.condition.text,
+
+    daily: data.forecast.forecastday.map(day => ({
+      day: day.date,
+      icon: "🌤️",
+      max: day.day.maxtemp_c,
+      min: day.day.mintemp_c
+    })),
+
+    hourly: data.forecast.forecastday[0].hour.map(hour => ({
+      time: hour.time.split(" ")[1],
+      icon: "🌤️",
+      temp: hour.temp_c
+    }))
+  };
+}
+
+// ================= RENDER =================
+
+// Banner
 function renderBannerInfo(data) {
   const caixa1 = document.querySelector(".caixa1 section");
 
@@ -12,7 +58,7 @@ function renderBannerInfo(data) {
     </div>
 
     <div>
-      <p id="clima">${data.icon} ${data.temperature}°C</p>
+      <p id="clima">${data.temperature}°C</p>
     </div>
   `;
 }
@@ -44,7 +90,7 @@ function renderDayInfo(data) {
   `;
 }
 
-
+// Semana
 function renderDaily(dailyData) {
   const lista = document.querySelector(".caixa1 section ul");
   lista.innerHTML = "";
@@ -62,7 +108,7 @@ function renderDaily(dailyData) {
   });
 }
 
-// Por hora
+// Horas
 function renderHourly(hourlyData) {
   const lista = document.querySelector(".caixa2 ul");
   lista.innerHTML = "";
@@ -79,7 +125,6 @@ function renderHourly(hourlyData) {
   });
 }
 
-// Função principal
 function renderPage(data) {
   renderBannerInfo(data);
   renderDayInfo(data);
@@ -87,5 +132,46 @@ function renderPage(data) {
   renderHourly(data.hourly);
 }
 
-// chamada final
-renderPage(cityWeather);
+
+async function start() {
+  const data = await fetchWeather("São Paulo");
+  const adapted = adaptWeatherData(data);
+
+  renderPage(adapted);
+}
+
+start();
+
+const input = document.querySelector("#pesquisa input");
+const button = document.querySelector("#pesquisa button");
+
+button.addEventListener("click", async () => {
+  const city = input.value;
+
+  if (!city) return;
+
+  try {
+    const data = await fetchWeather(city);
+    const adapted = adaptWeatherData(data);
+
+    renderPage(adapted);
+
+    localStorage.setItem("cidade", city);
+
+  } catch (error) {
+    alert("Erro ao buscar cidade!");
+    console.error(error);
+  }
+});
+
+
+window.addEventListener("load", async () => {
+  const cidadeSalva = localStorage.getItem("cidade");
+
+  if (cidadeSalva) {
+    const data = await fetchWeather(cidadeSalva);
+    const adapted = adaptWeatherData(data);
+
+    renderPage(adapted);
+  }
+});
